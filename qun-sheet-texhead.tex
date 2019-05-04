@@ -1,0 +1,43 @@
+\usepackage{parskip,palatino,amsthm,amsmath,amsfonts,amssymb}
+\usepackage{multicol}
+\usepackage{enumerate}
+\usepackage[letterpaper,margin=1in,bottom=0.7in]{geometry}
+
+\newcommand{\dd}[2]{\frac{d #1}{d #2}}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\brf}[2]{\left(\frac{#1}{#2}\right)}
+                       % Bracket-frac, e.g. for (n\pi x/L) in Fourier series
+\newcommand{\fsin}[1]{\sin\brf{#1 \pi x}{L}}
+\newcommand{\fcos}[1]{\cos\brf{#1 \pi x}{L}}
+\newcommand{\RR}{\mathbf{R}}
+\newcommand{\CC}{\mathbf{C}}
+\newcommand{\ZZ}{\mathbf{Z}}
+\newcommand{\mk}{\mathfrak}
+\newcommand{\mb}{\mathbf}
+\newcommand{\OP}{\operatorname}
+\newcommand{\MATR}[9]{\left(\begin{array}{cccc}#1 & #2 & \cdots & #3\\ #4 & #5 & \cdots & #6\\ \vdots & \vdots & \ddots & \vdots\\ #7 & #8 & \cdots & #9\end{array}\right)}
+\newcommand{\matr}[4]{\left(\begin{array}{cc}#1 & #2\\ #3 & #4\end{array}\right)}
+\newcommand{\matt}[9]{\left(\begin{array}{ccc}#1 & #2 & #3\\#4 & #5 & #6\\#7 & #8 & #9\end{array}\right)}
+\newcommand{\vect}[3]{\left(\begin{array}{c}#1 \\ #2 \\ #3\end{array}\right)}
+\newcommand{\ad}{\OP{ad}}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{lma}[thm]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{question}{Question}
+\newtheorem{answer}{Answer}
+
+\theoremstyle{remark}
+\newtheorem*{rmk}{Remark}
+
+%%%%%%%%%%%%%%%%%% Add extra space before theorems
+
+\begingroup 
+\makeatletter 
+\@for\theoremstyle:=definition,remark,plain,TheoremNum\do{% 
+\expandafter\g@addto@macro\csname th@\theoremstyle\endcsname{% 
+\addtolength\thm@preskip\parskip 
+}% 
+} 
+\endgroup 

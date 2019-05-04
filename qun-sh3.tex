@@ -1,0 +1,216 @@
+\documentclass[12pt]{article}
+
+\include{qun-sheet-texhead}
+%\include{diagrams}
+
+\title{Sheet 3: Lie algebras and the exponential map}
+\author{J. Evans}
+\date{}
+
+\begin{document}
+\maketitle
+
+
+
+\begin{question}\ \\
+\begin{enumerate}
+\item[(a)] Check that the commutator bracket $[X,Y]=XY-YX$ on matrices satisfies the Jacobi identity\footnote{Not to be confused the the Jacobi formula on the previous sheet!}
+\[[[X,Y],C]+[[Y,C],X]+[[C,X],Y]=0.\]
+\item[(b)] Define $\ad_X$ to be the operator $\ad_XY=[X,Y]$. Check that the Jacobi identity is equivalent to
+  \[\ad_{[X,Y]}Z=\ad_X\ad_YZ-\ad_Y\ad_XZ.\]
+\item[(c)] Expand the associativity relation
+  \[(\exp(A)\exp(B))\exp(C)=\exp(A)(\exp(B)\exp(C))\]
+  using the Baker-Campbell-Hausdorff formula keeping all {\em cubic} terms involving precisely one $A$, one $B$ and one $C$. Show that the Jacobi identity follows.
+\end{enumerate}
+\end{question}
+
+\iffalse
+\begin{answer}
+\begin{enumerate}[(a)]
+\item We have
+\begin{gather*}
+[X,Y],C]+[[Y,C],X]+[[C,X],Y]\\
+=XYC-YXC-CXY+CYX+YCX-CYX-XYC+XCY\\
++CXY-XCY-YCX+YXC
+\end{gather*}
+which cancels out if you stare at it for long enough.
+\item We have
+\begin{align*}
+\ad_{[X,Y]}Z&=[[X,Y],Z]\\
+           &=-[[Y,Z],X]-[[Z,X],Y]\mbox{ (}\Leftrightarrow\mbox{ Jacobi identity)}\\
+           &=[X,[Y,Z]]-[Y,[X,Z]]\\
+           &=\ad_X\ad_YZ-\ad_Y\ad_XZ.
+\end{align*}
+\item We have
+  \begin{align*}
+    (\exp(A)\exp(B))\exp(C)&=\exp(A+B+\frac{1}{2}[A,B]+\cdots)\exp(C)\\
+    &=\exp\left(A+B+\frac{1}{2}[A,B]+C+\frac{1}{2}[A+B,C]+\frac{1}{4}[[A,B],C]+\right.\\
+    &\ \ \ \ \ \left.+\frac{1}{12}([A+B,[A+B,C]]-[C,[A+B,C]]+\cdots)\right)\\
+    \exp(A)(\exp(B)\exp(C))&=\exp(A)\exp(B+C+\frac{1}{2}[B,C]+\cdots)\\
+    &=\exp\left(A+B+C+\frac{1}{2}[B,C]+\frac{1}{2}[A,B+C]+\frac{1}{4}[A,[B,C]]+\right.\\
+    &\ \ \ \ \ \left.+\frac{1}{12}([A,[A,B+C]]-[B+C,[A,B+C]])+\cdots\right)
+  \end{align*}
+  so comparing cubic terms which contain precisely one $A$, one $B$ and one $C$ we get
+  \[\frac{1}{4}[[A,B],C]+\frac{1}{12}[A,[B,C]]+\frac{1}{12}[B,[A,C]]=\frac{1}{4}[A,[B,C]]-\frac{1}{12}[B,[A,C]]-\frac{1}{12}[C,[A,B]]\]
+  which eventually simplifies (using the fact that $[X,Y]=-[Y,X]$) to the Jacobi identity.
+\end{enumerate}
+\end{answer}
+\newpage
+\fi
+
+\bigskip
+
+\begin{question}\ \\
+\begin{enumerate}
+\item[(a)] Show that the tangent space to $O(n)$ at 1 is the vector space $\mathfrak{so}(n)$ of antisymmetric matrices.
+\item[(b)] Using the Jacobi formula from Sheet 2, show that the tangent space to $SL(n,\RR)$ at $1$ is the vector space $\mathfrak{sl}(n,\RR)$ of matrices with trace zero.
+\item[(c)] Let $g\in U(n)$ (so $g^{\dagger}=g^{-1}$). By Taylor expanding the map $F(A)=A^{\dagger}A$ around $g$, show that $d_gF(B)=B^{\dagger}g+g^{-1}B$ and deduce that the tangent space of $U(n)$ at $g$ is the space of matrices $B$ such that $g^{-1}B$ is skew-Hermitian.
+\end{enumerate}
+\end{question}
+
+\iffalse
+\begin{answer}
+\begin{enumerate}[(a)]
+\item On the last sheet we saw that $A^T=-A$ implies $\exp(tA)\in O(n)$ hence $\gamma(t)=\exp(tA)$ is a path with tangent vector $\dot{\gamma}(0)=A$ at the identity for any antisymmetric matrix $A$. Conversely if $\gamma(t)$ is a path in $O(n)$ with $\dot{\gamma}(0)=A$ then from the equation $\gamma(t)^T\gamma(t)=1$ we get $\dot{\gamma}(0)\gamma(0)+\gamma(0)^T\dot{\gamma}(0)=0$ hence $A^T+A=0$.
+\item We know that $\det(\exp(tH))=\exp(t\OP{Tr}(H))$ so if $H\in\mathfrak{sl}(n,\RR)$ then $\gamma(t)=\exp(tH)$ is a path in $SL(n,\RR)$ with $\dot{\gamma}(0)=H$. Conversely if $\gamma(t)$ is a path in $SL(n,\RR)$ then $0=\frac{d}{dt}\det(\gamma(t))=\det(\gamma(t))\OP{Tr}(\gamma(t)^{-1}\dot{\gamma}(t))$ by Jacobi's formula and hence $0=\OP{Tr}\dot{\gamma}(0)$.
+\item If $F(A)=A^{\dagger}A$ then $F(g+\epsilon B)=(g+\epsilon B)^{\dagger}(g+\epsilon B)=g^{\dagger}g+\epsilon(B^{\dagger}g+g^{\dagger}B)+\epsilon^2B^{\dagger}B$. Thus $d_gF(B)=B^{\dagger}g+g^{\dagger}B=B^{\dagger}g+g^{-1}B$ since $g\in U(n)$.
+
+The map $F$ goes from $\mathfrak{gl}(n,\CC)$ to the space of Hermitian matrices. If we can show that $d_gF$ is surjective for any $g\in U(n)$ then we know that the tangent space at $g$ to $F^{-1}(1)$ is the kernel of $d_gF$, i.e. the matrices $B$ such that $B^{\dagger}g+g^{-1}B=0$. Since $g^{\dagger}=g^{-1}$ this means that $(g^{-1}B)^{\dagger}=B^{\dagger}g=-g^{-1}B$ so $g^{-1}B$ is skew-Hermitian.
+
+In order to check that $d_gF$ is surjective, suppose that $C$ is Hermitian. Let $B=gC/2$. We have $d_gF(B)=B^{\dagger}g+g^{\dagger}B=C^{\dagger}g^{\dagger}g/2+g^{\dagger}gC/2=C/2+C/2=C$ (using $C^{\dagger}=C$ and $g^{\dagger}=g^{-1}$). Therefore $d_gF$ is surjective for any $g\in U(n)$.
+\end{enumerate}
+\end{answer}
+\fi
+\newpage
+
+
+\bigskip
+
+\begin{question}\ \\
+Recall the $2n$-by-$2n$ matrix $J$ from lectures (all you need to remember about it is $J^2=-1$, $J^T=-J$). Inside $GL(2n,\RR)$ we defined subgroups
+\begin{itemize}
+\item $Sp(2n,\RR)=\{A :\ A^TJA=J\}$,
+\item $O(2n)=\{A\ :\ A^TA=1\}$,
+\item $GL(n,\CC)=\{A\ :\ AJ=JA\}$.
+\end{itemize}
+Prove that $Sp(2n,\RR)\cap O(2n)=GL(n,\CC)\cap O(2n)=GL(n,\CC)\cap Sp(2n,\RR)=U(n)$. (Recall that conjugate-transpose on $A\in GL(n,\CC)$ is just transpose on $A\in GL(2n,\RR)$)
+\end{question}
+
+\iffalse
+\begin{answer}
+\begin{itemize}
+\item $Sp(2n,\RR)\cap O(2n)\subset GL(n,\CC)$: If $A^TJA=J$ and $A^TA=1$ then $A^{-1}JA=J$ so $JA=AJ$.
+\item $GL(n,\CC)\cap O(n)\subset Sp(2n,\RR)$: If $AJ=JA$ and $A^TA=1$ then $A^TJA=A^TAJ=J$.
+\item $GL(n,\CC)\cap Sp(2n,\RR)\subset O(2n)$: If $AJ=JA$ and $A^TJA=J$ then $A^TAJ=A^TJA=J$ so $A^TA=1$.
+\end{itemize}
+Therefore the three pairwise intersections equal the triple intersection. To see that the triple intersection equals $U(n)$, note that the conjugate transpose of a complex $n$-by-$n$ matrix considered as a real $2n$-by-$2n$ matrix is the real transpose. Hence $A^TA=1$ implies that if $A\in GL(n,\CC)$ then $A$ is unitary.
+\end{answer}
+\newpage
+\fi
+
+\bigskip
+
+
+\begin{question}\ \\
+\begin{enumerate}
+\item[(a)]
+\begin{enumerate}
+\item[(i)] Show that $\exp\matr{a}{b}{0}{a}=\matr{e^a}{be^a}{0}{e^a}$ and hence find (complex) logarithms for the matrices
+\[\matr{\lambda}{1}{0}{\lambda}\ (\lambda\neq 0).\]
+\item[(ii)] If $A\in GL(2,\CC)$ let $N=P^{-1}AP$ be its Jordan normal form. Prove that if $N=\exp(X)$ then $A$ is in the image of the exponential map. Deduce that $\exp\colon\mathfrak{gl}(2,\CC)\to GL(2,\CC)$ is surjective.
+\end{enumerate}
+\item[(b)]
+\begin{enumerate}
+\item[(i)] Consider $B\in \mathfrak{sl}(2,\RR)$. Show that its Jordan normal form (considered as a complex matrix) is one of:
+\[\matr{\lambda}{0}{0}{-\lambda},\ (\lambda\in\RR\mbox{ or }i\RR)\quad\matr{0}{1}{0}{0}.\]
+\item[(ii)] Deduce that there are three possibilities for the eigenvalues of $\exp(B)$: both are positive, both are unit complex numbers or both are equal to 1. By exhibiting a matrix in $SL(2,\RR)$ whose eigenvalues satisfy none of these, deduce that $\exp\colon\mathfrak{sl}(2,\RR)\to SL(2,\RR)$ is not surjective.
+\end{enumerate}
+\end{enumerate}
+\end{question}
+
+\iffalse
+\begin{answer}
+\begin{enumerate}[(a)]
+\item \begin{enumerate}[(i)]
+\item We have
+\[\matr{a}{b}{0}{a}^n=\matr{a^n}{na^{n-1}b}{0}{a^n}\]
+so $\exp\matr{a}{b}{0}{a}=\matr{e^a}{\sum_{n=1}^{\infty}\frac{n}{n!}a^{n-1}b}{0}{e^a}$ The top right entry is just $e^ab$ because $n/(n!)=1/(n-1)!$ and setting $m=n-1$ the sum becomes $(\sum_{m=0}^{\infty}a^m/m!)b$. If $e^a=\lambda$ and $be^a=1$ then $a=\log\lambda\in\CC$ and $b=1/\lambda$, both of which are well-defined (up to a choice of branch of the logarithm function in the case of $a$) provided $\lambda\neq 0$.
+\item If $N=\exp(X)$ then $A=PNP^{-1}=P\exp(X)P^{-1}=\exp(PXP^{-1})$ (as can be seen by writing out the exponential as a power series and noting that $(1/n!)PN^nP^{-1}=(1/n!)(PNP^{-1})^n$). The Jordan normal form of $A$ is either $N=\matr{\lambda_1}{0}{0}{\lambda_2}$ or $N=\matr{\lambda}{1}{0}{\lambda}$; since $A$ is invertible none of the eigenvalues $\lambda$, $\lambda_1$ or $\lambda_2$ can be zero, hence we can find a logarithm $X=\matr{\log\lambda_1}{0}{0}{\log\lambda_2}$ or $\matr{\log\lambda}{1/\lambda}{0}{\log\lambda}$ respectively. Hence any matrix in $GL(2,\CC)$ has a (non-unique) logarithm and the exponential map is surjective.
+\end{enumerate}
+\item
+\begin{enumerate}
+\item[(i)] If $B\in\mathfrak{sl}(2,\RR)$ then its trace is zero and its determinant is real. As a complex matrix, $B$ has a JNF (either $\matr{\lambda_1}{0}{0}{\lambda_2}$ or $\matr{\lambda}{1}{0}{\lambda}$). Since trace and determinant invariant under conjugation, the trace of the JNF of $B$ is also zero and the determinant is real. In the first case this means $\lambda_1=-\lambda_2$ and $\lambda_1\lambda_2\in\RR$, or $-\lambda_1^2\in\RR$ hence $\lambda_1\in\RR$ or $\lambda_1\in i\RR$. In the second case this means $\lambda=0$.
+\item[(ii)] The eigenvalues of $\exp(B)$ are equal to the eigenvalues of $\exp(N)$ where $N$ is the JNF (because $B=PNP^{-1}$ implies $\exp(B)=P\exp(N)P^{-1}$ and eigenvalues are conjugation invariant). The eigenvalues of $N$ are either $e^{\lambda_1},e^{-\lambda_1}$ for $\lambda_1\in\RR$ or $\lambda_1\in i\RR$ or $e^0,e^0$. Therefore the eigenvalues are one of the following: both positive, both unit complex numbers or both equal to one. The matrix $\matr{-2}{0}{0}{-1/2}\in SL(2,\RR)$ has both negative real eigenvalues and hence is not in the image of $\exp\colon\mathfrak{sl}(2,\RR)\to SL(2,\RR)$.
+\end{enumerate}
+\end{enumerate}
+\end{answer}
+\newpage
+\fi
+
+\bigskip
+
+
+
+\begin{question}\ \\
+\begin{enumerate}
+\item[(a)] Let $Q$ be a matrix. Show that the tangent space of the matrix group
+\[G=\{A\in GL(n,\RR)\ :\ A^TQA=Q\}\]
+at the identity is $\mathfrak{g}=\{B\ :\ B^TQ+QB=0\}$.
+\item[(b)] Check that if $B_i^TQ+QB_i=0$ for $i=1,2$ then $[B_1,B_2]^TQ+Q[B_1,B_2]=0$.
+\item[(c)] Let $n=2$, $Q=j=\matr{0}{1}{-1}{0}$ (so that $G=Sp(2,\RR)$ and $\mathfrak{g}=\mathfrak{sp}(2,\RR)$). Prove that $\mathfrak{sp}(2,\RR)=\mathfrak{sl}(2,\RR)$ (where $\mathfrak{sl}(2,\RR)$ is the space of tracefree matrices).
+\end{enumerate}
+\end{question}
+
+\iffalse
+\begin{answer}
+\begin{enumerate}[(a)]
+If $A(t)$ is a path in $G$ (with $A(0)=1$ and $\dot{A}(0)=B$) then $A(t)^TQA(t)=Q$, so differentiating at $t=0$ gives
+\[B^TQ+QB=0.\]
+Conversely, if $B$ satisfies $B^TQ+QB=0$ then consider $R(t)=\exp(tB)^TQ\exp(tB)=\exp(tB^T)Q\exp(tB)$. We have $R(0)=Q$ and $\dot{R}(t)=\exp(tB^T)B^TQ\exp(tB)+\exp(tB^T)QB\exp(tB)$. Therefore
+\[\dot{R}(t)=\exp(tB^T)(B^TQ+QB)\exp(tB)=0\]
+and so $R(t)=R(0)=Q$. Therefore $\exp(tB)$ is a path in $G$ with tangent vector $B$ at the origin. This proves that $\mathfrak{g}=\{B\ :\ B^TQ+QB=0\}$ is the tangent space of $G$ at $1$.
+\item We have
+\begin{align*}
+[B_1,B_2]^TQ+Q[B_1,B_2]&=(B^T_2B^T_1-B^T_1B^T_2)Q+QB_1B_2-QB_2B_1\\
+                      &=-B^T_2QB_1+B^T_1QB_2-B^T_1QB_2+B^T_2QB_1
+\end{align*}
+(using $B_i^TQ=-QB_i$) and these cancel.
+\item If $B^Tj=-jB$ and $B=\matr{a}{b}{c}{d}$ then
+\[B^Tj=\matr{-c}{a}{-d}{b},\quad -jB=\matr{-c}{-d}{a}{b}\]
+so $a=-d$ is the only condition. This is the same as $\OP{Tr}(B)=0$ so $\mathfrak{sp}(2,\RR)=\mathfrak{sl}(2,\RR)$.
+\end{enumerate}
+\end{answer}
+\newpage
+\fi
+
+\bigskip
+
+\begin{question}\ \\
+Let $S$ be a neighbourhood of $1\in G$. Let $\langle S\rangle\subset G$ denote the subgroup generated by $S$ (i.e. $\langle S\rangle$ consists of all $g\in G$ that can be written as a product $s_1\cdots s_n$ with each $s_i\in S$).
+\begin{enumerate}
+\item[(a)] Let $\gamma\colon[0,1]\to G$ be a path with $\gamma(0)=1$. Prove that $\gamma(1)\in\langle S\rangle$.
+\item[(b)] Assuming that any two points in $S$ can be connected by a path, show that any two points in $\langle S\rangle$ can be connected by a path.
+\end{enumerate}
+
+{\em Hint for (a): Consider the cover of $[0,1]$ by open sets $U_t=\{r\in [0,1]\ :\ \gamma(r)=\gamma(t)s\mbox{ for some }s\in S\}_{t\in[0,1]}$. Take a finite subcover $U_{t_i}$, $0=t_0<t_1<\cdots<t_N=1$ and show inductively that $\gamma(t_i)$ can be written as a product of elements in $S$. It might help to draw a picture to illustrate what's going on.}
+\end{question}
+
+\iffalse
+\begin{answer}
+$G_1\subset\langle S\rangle$: Let $\gamma$ be a path from $1_G$ to $g$. For each $t$ consider the open subset
+\[U_t=\{r\in [0,1]\ :\ \gamma(r)=\gamma(t)s\mbox{ for some }s\in S\}=\gamma^{-1}(\gamma(t)S).\]
+This gives an open cover of $[0,1]$, which therefore has a finite subcover $U_{t_i}$, $i=0,\ldots,N$ with $0=t_0<t_1<\ldots<t_N=1$. We will prove by induction that $\gamma(t_i)\in \langle S\rangle$ which will then give $\gamma(t_N)=\gamma(1)=g\in \langle S\rangle$ as required.
+
+Certainly $\gamma(t_0)\in S\subset\langle S\rangle$. Suppose $\gamma(t_i)\in\langle S\rangle$. Take $t'\in U_{t_i}\cap U_{t_{i+1}}$. Then:
+\begin{itemize}
+\item $t'\in U_{t_i}$ implies $\gamma(t')\in\langle S\rangle$ by the induction hypothesis
+\item $t'\in U_{t_{i+1}}$ implies $\gamma(t')=\gamma(t_{i+1})s$ for some $s\in S$.
+\end{itemize}
+Thus $\gamma(t_{i+1})=\gamma(t')s^{-1}\in\langle S\rangle$, which completes the induction proof.
+
+$\langle S\rangle\subset G_1$: Since $g\in \langle S\rangle$ means $g=s_1s_2\cdots s_N$ for some $\{s_i\in S\}_{i=1}^N$. Now each $s_i$ is connected to the identity by a path $\gamma_i$ by assumption. Assume inductively that $\sigma=s_1\cdots s_k$ is connected to the identity by a path. Then this path can be concatenated with $\sigma\gamma_{k+1}$ to get a path connecting $1_G$ to $s_1\cdots s_{k+1}$. Thus $g$ is connected to $1_G$ by a continuous path.
+\end{answer}
+\fi
+
+
+\end{document}

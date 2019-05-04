@@ -1,0 +1,198 @@
+\documentclass[12pt]{article}
+
+\include{qun-sheet-texhead}
+\include{diagrams}
+
+\title{Sheet 1: Examples and exponentials}
+\author{J. Evans}
+\date{}
+
+\begin{document}
+\maketitle
+
+\bigskip
+
+\begin{question}\ \\
+Prove that the following are equivalent:
+\begin{enumerate}
+\item[(a)] $A\in O(n)$ (recall that $A\in O(n)$ if and only if $A^TA=1$),
+\item[(b)] $(Av)\cdot (Aw)=v\cdot w$ for all $v,w\in\RR^n$,
+\item[(c)] $|Av|^2=|v|^2$ for all $v\in\RR^n$.
+\end{enumerate}
+\end{question}
+
+\iffalse
+\begin{answer}
+(c) is obvious given (b): just take $v=w$. To show (b) from (c), take $u=v+w$ and note that
+\[|v|^2+|w|^2+2v\cdot w=|u|^2=|Au|^2=|Av|^2+|Aw|^2+2(Av)\cdot(Aw)\]
+which implies (b) since we are in characteristic $0\neq 2$.
+
+Suppose that $A\in O(n)$. Then $A^TA=1$ so
+\[(Av)\cdot(Aw)=v^TA^TAw=v^Tw=v\cdot w.\]
+Conversely, (b) holds then $v^TA^TAw=v^Tw$. If we let $v$ and $w$ run independently over an orthonormal basis $\{e_i\}$ then $e_i^TA^TAe_j=(A^TA)_{ij}=e_i^Te_j=\delta_{ij}$, so $A^TA=1$.
+
+Out of interest, here are two ways of going straight from (c) to (a):
+\begin{itemize}
+\item If $v=\sum_ix_ie_i$ then $|v|^2=\sum_ix_i^2$ and $|Av|^2=\sum_{j,k}\sum_iA_{ij}A_{ik}x_jx_k$. Thinking of these as polynomials in the $x_n$ and comparing coefficients we get $A_{ij}A_{ik}=\delta_{ij}$ so $A^TA=1$.
+\item $v^Tv=|v|^2=|Av|^2=v^TA^TAv$ so $v^T(A^TA-1)v=0$. $A^TA-1$ is symmetric and hence can be diagonalised in some orthonormal basis $e_i$. With respect to this basis, $e_i(A^TA-1)e_i=(A^TA-1)_{ii}=0$ so the diagonal entries are all zero. Since this matrix is in diagonal form, it must vanish. Hence $A^TA=1$.
+\end{itemize}
+\end{answer}
+\newpage
+\fi
+
+\bigskip
+
+\begin{question}
+\begin{enumerate}
+\item[(a)] Find the exponential of the matrix $H=\left(\begin{array}{ccc}0 & x & z\\ 0 & 0 & y \\ 0 & 0 & 0\end{array}\right)$.
+\item[(b)] Given a matrix $K=\left(\begin{array}{ccc}1 & a & c\\ 0 & 1 & b \\ 0 & 0 & 1\end{array}\right)$, find a matrix $H$ such that $\exp(H)=K$.
+\item[(c)] Compute $\exp\matr{x}{y}{0}{0}$.
+\end{enumerate}
+\end{question}
+
+\iffalse
+\begin{answer}
+\begin{enumerate}[(a)]
+\item \begin{align*}
+\exp(H)&=\matt{1}{0}{0}{0}{1}{0}{0}{0}{1}+\matt{0}{x}{z}{0}{0}{y}{0}{0}{0}+\frac{1}{2!}\matt{0}{0}{xy}{0}{0}{0}{0}{0}{0}\\
+       &=\matt{1}{x}{z+\frac{xy}{2}}{0}{1}{y}{0}{0}{1}
+\end{align*}
+\item We want to solve
+\[\matt{1}{x}{z+\frac{xy}{2}}{0}{1}{y}{0}{0}{1}=\matt{1}{a}{c}{0}{1}{b}{0}{0}{1}\]
+for $x,y,z$ so $x=a$, $y=b$ and $z=c-\frac{ab}{2}$, so we see
+\[\exp\matt{0}{a}{c-\frac{ab}{2}}{0}{0}{b}{0}{0}{0}=\matt{1}{a}{c}{0}{1}{b}{0}{0}{1}.\]
+\item We have
+\[\matr{x}{y}{0}{0}^n=\matr{x^n}{x^{n-1}y}{0}{0}\]
+so
+\[\exp\matr{x}{y}{0}{0}=\matr{1}{0}{0}{1}+\sum_{n=1}^{\infty}\frac{1}{n!}\matr{x^n}{x^{n-1}y}{0}{0}\]
+This gives
+\[\exp\matr{x}{y}{0}{0}=\matr{e^x}{\frac{e^x-1}{x}y}{0}{1}.\]
+\end{enumerate}
+\end{answer}
+\newpage
+\fi
+
+\bigskip
+
+\begin{question}
+Given $v=(x,y,z)$, consider the matrix
+\[K_v:=\matt{0}{-z}{y}{z}{0}{-x}{-y}{x}{0}.\]
+\begin{enumerate}
+\item[(a)] Show that if $u\in\RR^3$ then for any $v\in\RR^3$, $K_uv=u\times v$.
+\item[(b)] Hence or otherwise, show that if $|u|^2=1$ then $K_u^3=-K_u$ ({\em Hint: Recall that $a\times(b\times c)=b(a\cdot c)-c(a\cdot b)$.})
+\item[(c)] Show that if $|u|^2=1$ then $\exp(\theta K_u)=1+K_u\sin\theta+(1-\cos\theta)K_u^2$ and check that
+\[(\star)\quad \exp(\theta K_u)v=v\cos\theta+(u\times v)\sin\theta+(1-\cos\theta)(u\cdot v)u.\]
+$(\star)$ is {\em Rodrigues's formula} for the rotation of $v$ by an angle $\theta$ around $u$.
+\item[(d)] Show by direct computation that $[K_u,K_v]:=K_uK_v-K_vK_u=K_{u\times v}$ for any $u,v\in\RR^3$.
+\end{enumerate}
+\end{question}
+\bigskip
+
+\iffalse
+\begin{answer}
+\begin{enumerate}[(a)]
+\item If $u=(x,y,z)$ and $v=(a,b,c)$ then we have
+\[K_uv=\matt{0}{-z}{y}{z}{0}{-x}{-y}{x}{0}\vect{a}{b}{c}=\vect{cy-bz}{az-cx}{bx-ay}=u\times v.\]
+\item $K_u^3v=K_u^2(u\times v)=K_u(u\times(u\times v))=K_u(u(u\cdot v)-|u|^2v)=-K_uv$ since $K_uu=u\times u=0$ and $|u|^2=1$. Therefore $K_u^3=-K_u$.
+\item \begin{align*}
+\exp(\theta K_u)&=1+\sum_{n=1}^{\infty}\frac{\theta^n}{n!}K_u^n\\
+                &=1+\sum_{n\equiv 1\mod 2}\frac{\theta^n}{n!}(-1)^{(n-1)/2}K_u+\sum_{n\equiv 0\mod 2}\frac{\theta^n}{n!}(-1)^{n/2+1}K_u^2\\
+                &=1+K_u\sin\theta+K_u^2(1-\cos\theta)
+\end{align*}
+Equation $(\star)$ now follows immediately from this formula, the fact that $K_uv=u\times v$ and the formula $u\times (u\times v)=(u\cdot v)u-v$ (using $|u|^2=1$)
+\item We have
+\begin{align*}
+K_uK_vw-K_vK_uw&=u\times(v\times w)-v\times (u\times w)\\
+              &=(u\cdot w)v-(u\cdot v)w-(v\cdot w)u+(u\cdot v)w\\
+              &=(u\cdot w)v-(v\cdot w)u\\
+              &=(u\times v)\times v\\
+              &=K_{u\times v}w.
+\end{align*}
+\end{enumerate}
+\end{answer}
+\fi
+
+\hrule
+\bigskip
+The last two questions concern the group $SU(2)$ of unitary 2-by-2 matrices with determinant 1 and its Lie algebra $\mathfrak{su}(2)$ of 2-by-2 skew-Hermitian matrices with trace zero.
+
+For $v=(x,y,z)\in\RR^3$ we define
+\[M_v:=\matr{ix}{y+iz}{-y+iz}{-ix}\in\mathfrak{su}(2).\]
+\bigskip
+\hrule
+\bigskip
+\begin{question}\label{qun:su2exp}
+Show that $M_uM_v=-(u\cdot v)1+M_{u\times v}$. Deduce that if $|u|^2=1$ then $M_u^2=-1$ and hence that
+\[\exp(\theta M_u)=(\cos\theta)1+\sin\theta M_u=\left(\begin{array}{cc}
+\cos\theta+ix\sin\theta & y\sin\theta+iz\sin\theta\\
+-y\sin\theta+iz\sin\theta & \cos\theta-ix\sin\theta
+\end{array}\right)\in SU(2).\]
+\end{question}
+
+\iffalse
+\begin{answer}
+If $u=\vect{x}{y}{z}$ and $v=\vect{a}{b}{c}$ then
+\begin{align*}\matr{ix}{y+iz}{-y+iz}{-ix}\matr{ia}{b+ic}{-b+ic}{-ia}&=\matr{-ax-by-cz+i(yc-bz)}{az-cx+i(bx-ay)}{cx-az+i(bx-ay)}{-ax-by-cz+i(bz-cy)}\\
+&=-(u\cdot v)1+M_{u\times v}
+\end{align*}
+This implies immediately that if $|u|^2=1$ then $M_u^2=-1$ so
+\begin{align*}
+\exp(\theta M_u)&=\sum_{n=0}^{\infty}\frac{\theta^n}{n!}M^n_u\\
+                &=\sum_{n\equiv 0\mod 2}\frac{\theta^n}{n!}(-1)^{n/2}+\sum_{n\equiv 1\mod 2}\frac{\theta^n}{n!}(-1)^{(n-1)/2}M_u\\
+                &=(\cos\theta)1+M_u\sin\theta
+\end{align*}
+as required.
+\end{answer}
+\newpage
+\fi
+
+\bigskip
+
+\begin{question}
+Consider the action of $SU(2)$ on $\mathfrak{su}(2)$ given by
+\[\tilde{\rho}\colon SU(2)\times\mathfrak{su}(2)\to\mathfrak{su}(2),\quad\tilde{\rho}(g,m)=gmg^{-1}.\]
+\begin{enumerate}
+\item[(a)] Show that this defines a 3-dimensional real representation $\rho\colon SU(2)\to GL(\mathfrak{su}(2))$ of $SU(2)$.
+\item[(b)] Show that if $\tilde{\rho}(g,M_v)=M_{v'}$ then $|v'|^2=|v|^2$. ({\em Hint: Compute determinants.})
+\item[(c)] Recall from Question \ref{qun:su2exp} that if $|u|^2=1$ then $\exp(\theta M_u)=(\cos\theta)1+\sin\theta M_u$. Show that if $u$ and $v$ are vectors and $|u|^2=1$ then
+\[\tilde{\rho}(\exp(\theta M_u),M_v)=M_{v'}\]
+where
+\[v'=v\cos 2\theta+(u\times v)\sin 2\theta+(1-\cos 2\theta)(u\cdot v)u.\]
+In other words (Rodrigues's formula), the matrix $\exp(\theta M_u)$ acts as a rotation around $u$ by $2\theta$.
+\item[(d)] Let $SO(3)$ denote the group of rotations of 3-dimensional space. Prove that the map $\rho\colon SU(2)\to SO(3)$ is 2-to-1.
+\end{enumerate}
+\end{question}
+
+{\em The representation $\rho\colon SU(2)\to SO(3)$ is called the spin representation.}
+
+\iffalse
+\begin{answer}
+\begin{enumerate}[(a)]
+\item We need to show that $\rho(g)$, the map sending $m$ to $gmg^{-1}$ is
+\begin{itemize}
+\item linear: this is easy to check because $g(k_1m_1+k_2m_2)g^{-1}=k_1gm_1g^{-1}+k_2gm_2g^{-1}$ for $k_i\in\RR$ and $m_i\in\RR^3$;
+\item a homomorphism: $\rho(gh)m=ghm(gh)^{-1}=ghmh^{-1}g^{-1}=\rho(g)\rho(h)m$ hence $\rho(gh)=\rho(g)\rho(h)$.
+\end{itemize}
+\item If $v=\vect{x}{y}{z}$ then the determinant of $M_v$ is $x^2+y^2+z^2$. Since $\det(gmg^{-1})=\det(g)\det(m)\det(g)^{-1}=\det(m)$ this action preserves the determinant and hence preserves lengths of vectors.
+\item We need to show that
+\[\exp(\theta M_u)M_v\exp(-\theta M_u)=M_{v'}.\]
+Where $v'$ is as given in the question. We have (using $M_uM_v=-(u\cdot v)+M_{u\times v}$)
+\begin{align*}
+\exp(\theta M_u)M_v\exp(-\theta M_u)&=(\cos\theta+M_u\sin\theta)M_v(\cos\theta-M_u\sin\theta)\\
+                                   &=\cos^2\theta M_v+2\sin\theta\cos\theta M_{u\times v}-\sin^2\theta M_v-2\sin^2\theta(u\cdot v)M_u\\
+                                   &=M_{v'}
+\end{align*}
+where $v'=v\cos 2\theta+(u\times v)\sin 2\theta +(1-\cos 2\theta)(u\cdot v)u$.
+\item The map from $SU(2)$ to $SO(3)$ sends $\exp(\theta M_u)$ to the rotation by $2\theta$ around $u$.
+
+The map $\rho$ is surjective because every element of $SO(3)$ is a rotation by some angle around some axis.
+
+(To see this, it is sufficient to prove that $A\in SO(3)$ has an eigenvalue equal to 1 (the corresponding eigenvector will be the axis and the restriction of $A$ to the orthogonal complement of the eigenvector will be an element of $SO(2)$ and hence specify the angle $\theta$). The characteristic polynomial of $A$ is cubic and real hence has a real root $\lambda$; since $Av=\lambda v$ implies $|Av|^2=\lambda^2|v|^2=|v|^2$ we see that $\lambda=\pm 1$. Assume that none of the eigenvalues were equal to 1. If all eigenvalues were real they'd have to be equal to $-1$ and then the determinant would be 1; if one was real and equal to $-1$ but the other two were complex conjugates then the determinant would be negative ($z\bar{z}(-1)<0$). Therefore at least one eigenvalue has to be 1. Therefore we deduce that every $A\in SO(3)$ has an axis and hence sits in the image of our map $\rho\colon SU(2)\to SO(3)$.)
+
+This map is a representation, hence a homomorphism, so the number of preimages of $A\in SO(3)$ is independent of $A$. In particular it is a $|\ker\rho|$-to-1 map since $\ker\rho$ is the set of preimages of the identity. Since $\exp(\theta M_u)$ acts by rotation by $2\theta$, we see that the kernel consists of $\exp(\theta M_u)$ for $2\theta\in 2\pi\ZZ$, i.e. $\theta\in \pi\ZZ$. But $\exp(n\pi M_u)\exp(\theta M_u)=\cos(n\pi)+M_u\sin(n\pi)=(-1)^n$, hence the kernel of the map comprises the two matrices $\pm 1$. Hence we see it is 2-to-1.
+\end{enumerate}
+\end{answer}
+\newpage
+\fi
+
+\end{document}

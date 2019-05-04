@@ -1,0 +1,241 @@
+\documentclass[12pt]{article}
+
+\include{qun-sheet-texhead}
+\include{diagrams}
+
+\title{Sheet 4: Lie's theorem}
+\author{J. Evans}
+\date{}
+
+\begin{document}
+\maketitle
+
+Recall Lie's theorem:
+\begin{thm}[Lie]
+Let $G$ and $H$ be two path-connected matrix groups with Lie algebras $\mathfrak{g}$ and $\mathfrak{h}$. Suppose moreover that $G$ is simply-connected. For any Lie algebra homomorphism $f\colon\mathfrak{g}\to\mathfrak{h}$ there is a unique smooth homomorphism $F\colon G\to H$ with $F_*=f$.
+\end{thm}
+
+\begin{question}
+Suppose that $G$ and $H$ are both path-connected, simply-connected matrix groups and that $\mathfrak{g}\cong\mathfrak{h}$ as Lie algebras. Prove that $G\cong H$. (You may assume Lie's theorem).
+\end{question}
+
+\iffalse
+\begin{answer}
+Let $f\colon\mathfrak{g}\to\mathfrak{h}$ be an isomorphism of the Lie algebras. Since $G$ is connected and simply-connected and $H$ is connected, this exponentiates (by Lie's theorem) to a homomorphism $F\colon G\to H$. The inverse $f^{-1}$ also exponentiates to $\tilde{F}\colon H\to G$ since $H$ is also simply-connected. The composition $\tilde{F}\circ F$ has differential $f^{-1}\circ f=\OP{id}$ and by the uniqueness part of Lie's theorem it must itself be the identity. Therefore $\tilde{F}=F^{-1}$ and $F$ is an isomorphism.
+\end{answer}
+\fi
+
+
+The remaining exercises form a guided proof of Lie's theorem. The first ingredient we will need is a compatibility condition for a system of partial differential equations to have a solution.
+
+\begin{question}[Maurer-Cartan equation]
+In this question, you can freely assume the existence\footnote{All of the ODEs we come across will have solutions for all time.} and uniqueness of solutions to {\em ordinary} differential equations. Let $G$ be a matrix group with Lie algebra $\mathfrak{g}$. Let $\xi(s,t)$ and $\eta(s,t)$ be two smooth maps $[0,1]\times[0,1]\to\mathfrak{g}$. Prove that the following are equivalent:
+\begin{enumerate}
+\item[(a)] The {\em partial} differential equations
+\[(\star)\quad\pd{\phi}{s}(s,t)=\phi(s,t)\xi(s,t),\quad(\star\star)\quad\pd{\phi}{t}(s,t)=\phi(s,t)\eta(s,t)\]
+have a solution $\phi\colon [0,1]\times[0,1]\to G$ with $\phi(0,0)=1$.
+\item[(b)] The {\em Maurer-Cartan equation} holds:
+\[(\star\star\star)\quad\pd{\xi}{t}-\pd{\eta}{s}=[\xi,\eta].\]
+\end{enumerate}
+{\em Hints:
+
+For (a) implies (b), try cross-differentiating $(\star)$ and $(\star\star)$ and seeing what turns up.
+
+For (b) implies (a): This is tricky. Construct $\phi(s,0)$ first by considering $(\star)$ as an ODE at $t=0$. Then use $\phi(s,0)$ as the initial conditions for $(\star\star)$, considered as an ODE for each fixed value of $s$. By construction this solves $(\star\star)$ and it solves $(\star)$ along $t=0$; it remains to show that $(\star)$ holds everywhere. For fixed $s$, consider $\beta(t)=\pd{\phi}{s}(s,t)-\phi(s,t)\xi(s,t)$ and show (using $(\star\star)$ and $(\star\star\star)$) that $\dd{\beta}{t}=\beta\eta$; deduce that $\beta\equiv 0$ using uniqueness of solutions to ODEs and the initial condition $(\star)$ along $t=0$.}
+\end{question}
+
+\iffalse
+\begin{answer}
+{\bf (a) implies (b):} Given such a solution we differentiate to get
+\[\frac{\partial^2\phi}{\partial s\partial t}=\frac{\partial\phi}{\partial t}\xi+\phi\frac{\partial\xi}{\partial t}=\frac{\partial\phi}{\partial s}\eta+\phi\frac{\partial\eta}{\partial s}\]
+so using ($\star$) we get
+\[\phi(\partial_t\xi-\partial_s\eta)=\phi[\xi,\eta]\]
+which gives (b).
+
+{\bf (b) implies (a):} We first solve the ODE
+\[\frac{d\phi}{ds}(s,0)=\phi(s,0)\xi(s,0)\]
+when $t=0$. Now we use $\phi(s,0)$ as an initial condition for the ODE
+\[\frac{d\phi}{dt}(s,t)=\phi(s,t)\eta(s,t)\]
+for each fixed $s$. This allows us to define $\phi(s,t)$ for all $(s,t)$ and by construction it satisfies $\partial\phi/\partial t=\phi\eta$. It only remains to check that $\partial\phi/\partial s=\phi\xi$. Define $\beta(s,t)=\frac{\partial\phi}{\partial s}(s,t)-\phi(s,t)\xi(s,t)$ and note that by construction $\beta(s,0)=0$. We will show that $\frac{\partial\beta}{\partial t}(s,t)=\beta(s,t)\eta(s,t)$ so that $\beta$ is identically zero (because of the zero initial condition). We have
+\begin{align*}
+\frac{\partial\beta}{\partial t}&=\frac{\partial^2\phi}{\partial s\partial t}-\frac{\partial\phi}{\partial t}\xi-\phi\frac{\partial\xi}{\partial t}\\
+&=\frac{\partial\phi}{\partial s}\eta+\phi\frac{\partial\eta}{\partial s}-\phi\eta\xi-\phi\frac{\partial\xi}{\partial t}
+\end{align*}
+where we have used the equation $\partial\phi/\partial t=\phi\eta$ twice. Now we use the identity $\frac{\partial\xi}{\partial t}-\frac{\partial\eta}{\partial s}=[\xi,\eta]$ to get
+\begin{align*}\frac{\partial\beta}{\partial t}&=\phi[\eta,\xi]+\frac{\partial\phi}{\partial s}\eta-\frac{\partial\phi}{\partial t}\xi\\
+&=\beta\eta\end{align*}
+since $[\eta,\xi]=\eta\xi-\xi\eta$.
+\end{answer}
+\fi
+
+
+{\bf Paths in $G$ from paths in $\mathfrak{g}$:}
+
+\begin{question}
+\begin{enumerate}
+\item[(a)]  Let $\gamma\colon[0,1]\to G$ be a path. For each $s\in[0,1]$, by considering the path $\gamma(s)^{-1}\gamma(t)$ show that $A(s)=\gamma^{-1}(s)\dot{\gamma}(s)$ is a tangent vector to $G$ at $1$. That is $A(s)\in\mathfrak{g}$.
+
+\item[(b)] Conversely, let $X\in\mathfrak{g}$ and $g\in G$. Show that $gX$ is a tangent vector to $G$ at $g$. Hence $T_gG=g\mathfrak{g}$.
+\end{enumerate}
+\end{question}
+
+A consequence of this and the existence/uniqueness of solutions to ODEs is the following lemma which we will use to construct $F$.
+\begin{lma}
+Let $A\colon[0,1]\to\mathfrak{g}$ be a path in $\mathfrak{g}$. Show that if $\gamma\colon[0,1]\to GL(n,\RR)$ is a path satisfying $\dot{\gamma}(t)=\gamma(t)A(t)$ then $\gamma(t)\in G$ for all $t$.
+\end{lma}
+
+\iffalse
+\begin{answer}
+\begin{enumerate}[(a)]
+\item For each $s$, the path $\delta(t)=\gamma(s)^{-1}\gamma(t)$ is a path in $G$ with $\delta(s)=1$. We have $\dot{\delta}(t)=\gamma(s)^{-1}\dot{\gamma}(t)$ so $\dot{\delta}(s)=\gamma(s)^{-1}\dot{\gamma}(s)=A(s)$ is a tangent vector to $G$ at $1$.
+\item Conversely if $X\in\mathfrak{g}$ and $g\in G$ then $\gamma(t)=g\exp(tX)\in G$ for all $t$ so $\dot{\gamma}(0)=gX\in T_gG$.
+\end{enumerate}
+
+{\small {\bf Out of interest:} To prove the Lemma, we will show that the interval inside $\RR$ on which $\gamma(t)\in G$ is both open and closed, hence it's the whole of $\RR$. Closedness is obvious because $G$ is a closed subset and $\gamma$ is a continuous path. To prove openness suppose that $\gamma(t)\in G$ - we will show that $\gamma(t+\epsilon)\in G$ for $|\epsilon|$ sufficiently small. Note that in local exponential coordinates $\gamma(t)\exp(w_1)\exp(w_2)$ near $\gamma(t)$, (where $w_1\in\mathfrak{g}$ and $w_2\in W_2$ for a complement $W_2$ of $\mathfrak{g}$) a neighbourhood of $\gamma(t)\in G$ is identified with a neighbourhood of $0\in\mathfrak{g}$ and tangent vectors to $G$ are identified with tangent vectors to $\mathfrak{g}$. We define the vector field $B(g,\epsilon)=gA(t+\epsilon)$ depending on $g\in GL(n,\RR)$ and a parameter $\epsilon$. Along $G$ this is tangent to $G$ and hence in the exponential chart it becomes a vector field $\tilde{B}(w_1,w_2,\epsilon)$ which is tangent to $\mathfrak{g}$ along $\mathfrak{g}$ (that is $\tilde{B}(w_1,0,\epsilon)$ has no $W_2$ component). By the existence/uniqueness theorems for ODEs there is a solution to $(\dot{\delta}(\epsilon),0)=\tilde{B}(\delta(\epsilon),0,\epsilon)$ starting at $\delta(0)=0\in\mathfrak{g}$ and the image of this under the exponential chart is a solution $\gamma(t+\epsilon)$ to the original ODE.}
+\end{answer}
+\fi
+
+\bigskip
+\hrule
+
+{\bf The construction of $F(g)$:} 
+
+Let $\gamma\colon[0,1]\to G$ be a path with $\gamma(0)=1$ and $\gamma(1)=g$. Define $A(t)=\gamma(t)^{-1}\dot{\gamma}(t)\in\mathfrak{g}$. Now consider the differential equation
+\[\dot{\delta}(t)=\delta(t)f(A(t)),\quad\delta(0)=1\]
+for a path $\delta$ in $H$. We call $\delta$ the {\em path associated to $\gamma$}.
+
+\begin{center}\fbox{Define $F(g)=\delta(1)$.}\end{center}
+
+We will show that
+\begin{itemize}
+\item $\delta(1)$ does not depend on the choice $\gamma$ of path from $1$ to $g$;
+\item that $F\colon G\to H$ is a homomorphism;
+\item that $F_*=f$.
+\end{itemize}
+\bigskip
+\hrule
+\bigskip
+
+{\bf Path-independence of $\delta(1)$:}
+
+Suppose that $\gamma_i$, $i=0,1$ are two choices of path with $\gamma_i(0)=1$ and $\gamma_i(1)=g$ and associated paths $\delta_i$. Since $G$ is simply-connected there is a map $\psi\colon[0,1]\times [0,1]\to G$ such that
+\[\psi(0,t)=\gamma_0(t),\quad \psi(1,t)=\gamma_1(t),\quad\psi(s,0)=1,\quad\psi(s,1)=g.\]
+\begin{question}
+\begin{enumerate}
+\item[(a)] Show that $\xi$ and $\eta$ satisfy the Maurer-Cartan equation, where
+\[\xi(s,t)=\psi^{-1}\pd{\psi}{s}\in\mathfrak{g},\quad\eta(s,t)=\psi^{-1}\pd{\psi}{t}\in\mathfrak{g}.\]
+\item[(b)] If $f\colon\mathfrak{g}\to\mathfrak{h}$ is a Lie algebra homomorphism deduce that $f\xi$ and $f\eta$ also satisfy the Maurer-Cartan equation.
+\item[(c)] Deduce that if $f$ is a Lie algebra homomorphism then there exists a map $\phi\colon[0,1]\times[0,1]\to H$ such that $\phi(0,0)=1$ and
+\[\pd{\phi}{s}=\phi f(\xi),\quad\pd{\phi}{t}=\phi f(\eta).\]
+\item[(d)] Why is $\xi(s,1)=0$? Deduce that $\phi(s,1)$ is independent of $s$ and hence that $\delta_0(1)=\delta_1(1)$.
+\end{enumerate}
+\end{question}
+
+\iffalse
+\begin{answer}
+\begin{enumerate}[(a)]
+\item
+By the Maurer-Cartan theorem, the existence of $\psi$ implies that if
+\[\pd{\psi}{s}(s,t)=\psi(s,t)\xi(s,t),\quad\pd{\psi}{t}(s,t)=\psi(s,t)\eta(s,t)\]
+then $\xi$ and $\eta$ solve the Maurer-Cartan equation.
+\item If $f$ is a Lie algebra homomorphism then
+\[\pd{f\xi}{t}-\pd{f\eta}{s}=f\left(\pd{\xi}{t}-\pd{\eta}{s}\right)=f[\xi,\eta]=[f\xi,f\eta].\]
+so $f\xi$ and $f\eta$ satisfy the Maurer-Cartan equation.
+\item By the Maurer-Cartan theorem if $f\xi$ and $f\eta$ satisfy the Maurer-Cartan equation then the existence of such a $\phi$ follows.
+\item Since $\psi(s,1)=g$ we have $\xi(s,1)=\pd{\psi}{s}(s,1)=0$. Hence $f\xi(s,1)=0$ and hence $\pd{\phi}{s}(s,1)=\phi(s,1)f\xi(s,1)=0$ and so $\phi(s,1)$ is independent of $s$. Since $\delta_i$ is the associated path to $\gamma_i$ ($i=0,1$) it is equal to $\psi(i,t)$ and therefore we have proved that $\delta_0(1)=\delta_1(1)$.
+\end{enumerate}
+\end{answer}
+\fi
+
+\newpage
+
+{\bf $F$ is a homomorphism.}
+
+\begin{question}
+If $\delta(t)$ is a path in a group then, by differentiating $\delta(t)^{-1}\delta(t)=1$, prove that
+\[\dd{(\delta(t)^{-1})}{t}=-\delta(t)^{-1}\dot{\delta}(t)\delta(t)^{-1}.\]
+\end{question}
+
+\iffalse
+\begin{answer}
+Differentiating $\delta(t)^{-1}\delta(t)=1$ with respect to $t$ gives
+\[\dd{\delta^{-1}}{t}(t)\delta(t)=-\delta(t)^{-1}\dd{\delta}{t}(t)\]
+so
+\[\dd{\delta^{-1}}{t}(t)=-\delta(t)^{-1}\dd{\delta}{t}(t)\delta(t)^{-1}.\]
+\end{answer}
+\fi
+
+Take a path $\gamma$ in $G$ with $\gamma(0)=1$ and $\gamma(1)=g$ and let $\delta$ be the associated path in $H$ (equivalently $\delta^{-1}\dot{\delta}=f(\gamma^{-1}\dot{\gamma})$) and recall that $F(g)=\delta(1)$.
+
+\begin{question}\label{qun:intertwined}
+Show that $\delta(t)^{-1}f(X)\delta(t)$ and $f(\gamma(t)^{-1}X\gamma(t))$ are both solutions to the ODE
+\[\dot{z}(t)=[z(t),\delta(t)^{-1}\dot{\delta}(t)]\]
+with initial condition $z(0)=f(X)$. Deduce that they are equal for all $t$ and hence prove that
+\[\delta(1)^{-1}f(X)\delta(1)=f(\gamma^{-1}(1)X\gamma(1)),\]
+or, equivalently,
+\[F(g)^{-1}f(X)F(g)=f(g^{-1}Xg).\]
+\end{question}
+
+\iffalse
+\begin{answer}
+\begin{align*}
+\frac{d}{dt}\left(\delta(t)^{-1}f(X)\delta(t)\right)&=-\delta^{-1}\dot{\delta}\delta^{-1}f(X)\delta+\delta^{-1}f(X)\dot{\delta}\\
+&=[\delta^{-1}f(X)\delta,\delta^{-1}\dot{\delta}].
+\end{align*}
+We also have
+\begin{align*}
+\frac{d}{dt}\left(f(\gamma^{-1}(t)X\gamma(t)\right)&=-f(\gamma^{-1}\dot{\gamma}\gamma^{-1}X\gamma)+f(\gamma^{-1}X\gamma\gamma^{-1}\dot{\gamma})\\
+&=f[\gamma^{-1}X\gamma,\gamma^{-1}\dot{\gamma}]\\
+&=[f(\gamma^{-1}X\gamma),f(\gamma^{-1}\dot{\gamma})]\\
+&=[f(\gamma^{-1}X\gamma),\delta^{-1}\dot{\delta}]
+\end{align*}
+Therefore $\delta^{-1}(t)f(X)\delta(t)$ and $f(\gamma(t)^{-1}X\gamma(t))$ are both solutions to the equation
+\[\dot{z}=[z,\delta^{-1}\dot{\delta}]\]
+with initial condition $\delta^{-1}(0)f(X)\delta(0)=f(\gamma(0)^{-1}X\gamma(0))=f(X)$. By uniqueness we know they are equal for all $t$, in particular for $t=1$, which implies the result.
+\end{answer}
+\fi
+
+\begin{question}
+Suppose that $\alpha,\beta$ are paths in $G$ with $\alpha(0)=\beta(0)=1$ and $\alpha(1)=g$, $\beta(1)=h$. Define the path $\gamma(t)=\alpha(t)\beta(t)$ in $G$ with $\gamma(1)=gh$ and associated paths $u,v,w$ in $H$ satisfying
+\begin{align*}
+\dot{u}&=uf(\alpha^{-1}\dot{\alpha})\quad\mbox{so }F(g)=u(1)\\
+\dot{v}&=vf(\beta^{-1}\dot{\beta})\quad\mbox{so }F(h)=v(1)\\
+\dot{w}&=wf(\gamma^{-1}\dot{\gamma})\quad\mbox{so }F(gh)=w(1)
+\end{align*}
+Prove that $w=uv$ by showing that they both solve the same ODE
+\[\dot{z}=zv^{-1}f(\alpha^{-1}\dot{\alpha})v+zf(\beta^{-1}\dot{\beta})\]
+with the initial condition $z(0)=1$.
+\end{question}
+
+\iffalse
+\begin{answer}
+We want to show that $w=uv$ and we do this by showing that they both solve the same ordinary differential equation with the same initial conditions. Differentiating:
+\begin{align*}
+\dot{w}&=wf(\gamma^{-1}\dot{\gamma})\\
+&=wf(\beta^{-1}\alpha^{-1}(\dot{\alpha}\beta+\alpha\dot{\beta})\\
+&=wf(\beta^{-1}\alpha^{-1}\dot{\alpha}\beta)+wf(\beta^{-1}\dot{\beta})\\
+&=wv^{-1}f(\alpha^{-1}\dot{\alpha})v+wf(\beta^{-1}\dot{\beta})
+\end{align*}
+where we used Question \ref{qun:intertwined} in this last line. We also have
+\[\frac{d}{dt}(uv)=\dot{u}v+u\dot{v}=uf(\alpha^{-1}\dot{\alpha}v+uvf(\beta^{-1}\dot{\beta})\]
+so we see that both $uv$ and $w$ solve
+\[dz/dt=zv^{-1}f(\alpha^{-1}\dot{\alpha})v+zf(\beta^{-1}\dot{\beta})\]
+with initial condition $z(0)=1$.
+\end{answer}
+\fi
+
+{\bf $F_*=f$:}
+
+\begin{question}
+Suppose that $\gamma(t)=\exp(tX)$. Prove that the associated path in $H$ is given by $\delta(t)=\exp(tf(X))$. Deduce that $F(\exp X)=\exp(f(X))$ and hence that $f(X)=F_*(X)$.
+\end{question}
+
+\iffalse
+\begin{answer}
+Since $\dot{\gamma}(t)=\gamma(t)X$ we have $A(t)=X$ and hence the associated path is defined by the equation $\dot{\delta}(t)=\delta(t)f(X)$ and $\delta(0)=1$. Thus $\delta(t)=\exp(tf(X))$ by uniqueness of solutions to ODEs. Therefore $F(\exp X)=\delta(1)=\exp(f(X))$ so $F_*=f$.
+\end{answer}
+\fi
+
+This completes the proof of Lie's theorem. \qedhere
+
+\end{document}

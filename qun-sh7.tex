@@ -1,0 +1,223 @@
+\documentclass[12pt]{article}
+
+\include{qun-sheet-texhead}
+\include{diagrams}
+\usepackage{pdfpages}
+
+\title{Sheet 7: Representations of $SU(3)$ and beyond}
+\author{J. Evans}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{question}\ \\
+Let $\mathfrak{g}$ be the Lie algebra $\mathfrak{sl}(3,\CC)$ (this will work more generally for any complex semisimple Lie algebra). Suppose that $\rho\colon \mathfrak{g}\to \mathfrak{gl}(V)$ and $\sigma\colon \mathfrak{g}\to \mathfrak{gl}(W)$ are irreducible representations of $\mathfrak{g}$ both having highest weight $\lambda$.
+\begin{enumerate}[(a)]
+\item Let $v$ be a highest weight vector in $V$ and $w$ a highest weight vector in $W$. Show that $v\oplus w$ is a highest weight vector in $V\oplus W$.
+\item Deduce that there is an irreducible subrepresentation $U\subset V\oplus W$ containing $v\oplus w$, and that the projections $U\to V$ and $U\to W$ are isomorphisms. Hence deduce that $V$ is isomorphic to $W$. ({\em Hint: Use Schur's lemma.})
+\end{enumerate}
+\end{question}
+
+\iffalse
+\begin{answer}
+Let $\mathfrak{h}$ be a Cartan subalgebra.
+\begin{enumerate}[(a)]
+\item For $H$ in $\mathfrak{h}$ and $x\in V_{\lambda_1}$, $y\in W_{\lambda_2}$ we have
+\[\rho(H)x=\lambda_1(H)x\mbox{ and }\sigma(H)y=\lambda_2(H)y\]
+so
+\[(\rho\oplus\sigma)(H)(x\oplus 0)=\rho(H)x\oplus 0=\lambda_1(H)x\oplus 0\]
+and
+\[(\rho\oplus\sigma)(H)(0\oplus y)=0\oplus \sigma(H)y=0\oplus \lambda_2(H)y\]
+so the weights in the representation $V\oplus W$ are precisely the union of weights in $V$ and in $W$. Therefore $\lambda$ is the highest weight and $v\oplus w$ is one of the highest weight vectors.
+\item The images of $v\oplus w$ under words in the matrices $(\rho\oplus\sigma)(E)$ (where $E$ is a negative root) generate an irreducible subrepresentation of highest weight $\lambda$ which we call $U$. The projections of $U$ to $V$ and to $W$ are nontrivial (in particular, their images contain $v$ and $w$) but these projections are morphisms of irreducible representations and are therefore isomorphisms by Schur's lemma.
+\end{enumerate}
+\end{answer}
+\newpage
+\fi
+
+\bigskip
+
+\begin{question}\ \\
+Let $\rho\colon\mathfrak{su}(3)\to\mathfrak{gl}(V)$ be an irreducible representation of $\mathfrak{su}(3)$ and $v$ be a highest weight vector. Let $D$ be the set of words in $\rho(E_{21}),\rho(E_{31}),\rho(E_{32})$ and let $W\subset V$ be the subspace spanned by the subset $\{wv\ :\ w\in D\}$. By induction on the length of $w$, show that $W$ is preserved by $\rho(E_{12}),\rho(E_{13}),\rho(E_{23})$.
+\end{question}
+
+\iffalse
+\begin{answer}
+It is certainly true for words of length zero: the matrices $\rho(E_{12}),\rho(E_{13}),\rho(E_{23})$ annihilate $v$ and hence send it to $0\in W$. Suppose it is true for all words of length $\leq k$. Let $w$ be a word of length $k+1$ and suppose that its first letter is $\rho(E_{21})$. Then
+\[wv=\rho(E_{21})\tilde{v}\]
+and
+\begin{align*}
+\rho(E_{12})wv&=\rho(E_{12})\rho(E_{21})\tilde{v}\\
+&=\rho([E_{12},E_{21}])\tilde{v}+\rho(E_{21})\rho(E_{12})\tilde{v}\\
+&=\rho(H_{12})\tilde{v}+\rho(E_{21})\rho(E_{12})\tilde{v}.
+\end{align*}
+Now $\tilde{v}$ is a weight vector so it is sent to a multiple of itself by $\rho(H_{12})$. The second term is $\rho(E_{21})$ applied to an element of $W$ (by induction) so since $W$ is closed under the action of $\rho(E_{21})$ we see that $\rho(E_{12})wv\in W$.
+
+Similarly
+\begin{align*}
+\rho(E_{13})wv&=\rho(E_{12})\rho(E_{21})\tilde{v}\\
+&=\rho([E_{13},E_{21}])\tilde{v}+\rho(E_{21})\rho(E_{13})\tilde{v}\\
+&=\rho(-E_{23})\tilde{v}+\rho(E_{21})\rho(E_{13})\tilde{v}.
+\end{align*}
+and by induction, both terms are in $W$.
+
+Similarly
+\begin{align*}
+\rho(E_{23})wv&=\rho(E_{23})\rho(E_{21})\tilde{v}\\
+&=\rho([E_{23},E_{21}])\tilde{v}+\rho(E_{21})\rho(E_{23})\tilde{v}\\
+&=\rho(E_{21})\rho(E_{23})\tilde{v}.
+\end{align*}
+which is in $W$ by induction. Similarly for the other two possibilities of initial letter.
+\end{answer}
+\newpage
+\fi
+
+\bigskip
+
+\begin{question}\ \\
+Let $\CC^3$ denote the standard representation of $SU(3)$ and $\Gamma_{a,b}$ denote the unique irreducible representation with highest weight $aL_1-bL_3$. We will see below that $\Gamma_{a,b}$ exists.
+\begin{enumerate}[(a)]
+\item Show that $\OP{Sym}^a\CC^3$ is $\Gamma_{a,0}$ and $\OP{Sym}^b(\CC^3)^*$ is $\Gamma_{0,b}$ and draw the weight diagrams.
+\item Prove that $\OP{Sym}^a\CC^3\otimes\OP{Sym}^b(\CC^3)^*$ contains an irreducible summand isomorphic to $\Gamma_{a,b}$. This proves existence of an irreducible representation with given highest weight vector $aL_1-bL_3$.
+\item Decompose $\CC^3\otimes(\CC^3)^*$ into irreducible subrepresentations.
+\item Decompose $\OP{Sym}^2\CC^3\otimes(\CC^3)^*$ into irreducible subrepresentations.
+\item Decompose $\CC^3\otimes\Gamma_{2,1}$ into irreducible subrepresentations.
+\item Decompose $(\CC^3)^{\otimes 3}$ into irreducible subrepresentations.
+\item Decompose $\Gamma_{1,1}\otimes\Gamma_{1,2}$ into irreducible subrepresentations.
+\end{enumerate}
+\end{question}
+
+\iffalse
+\begin{answer}
+\begin{enumerate}[(a)]
+\item In the standard representation $e_1,e_2,e_3$ is a basis of weight vectors with weights $L_1,L_2,L_3$. Consider the element $\OP{Av}(e_{i_1}\otimes\cdots\otimes e_{i_a})\in\OP{Sym}^a\CC^3$. This has weight $\sum_{k=1}^aL_{i_k}$. The element $\OP{Av}(e_1\otimes\cdots\otimes e_1)$ has the highest weight $aL_1$ and generates an irreducible subrepresentation $\Gamma_{a,0}$. The weights of the representation $\OP{Sym}^a\CC^3$ form a triangle with vertices at $aL_1,aL_2,aL_3$ and all weight spaces are one-dimensional. By the classification of irreducible representations of $\mathfrak{su}(3)$ this implies that it {\em is} $\Gamma_{a,0}$
+
+Here is the diagram of the symmetric square:
+
+\slsymsq{1}
+
+The $b$th symmetric power of the dual contains a vector of weight $-bL_3$ and the argument proceeds similarly.
+\item The representation $\OP{Sym}^a\CC^3\otimes\OP{Sym}^b(\CC^3)^*$ contains a vector of weight $aL_1-bL_3$ (namely $e_1^{\otimes a}\otimes (e_3^*)^{\otimes b}$). This is the highest weight that occurs, so it generates an irreducible subrepresentation $\Gamma_{a,b}$.
+\item[(c-f)] See next few pages. Note (typo!) that in 3(e) it should be a $\Gamma_{2,0}$ not a $(\CC^*)^3$.
+\item[(g)] $\Gamma_{2,3}\oplus\Gamma_{0,4}\oplus\Gamma_{3,1}\oplus 2\Gamma_{1,2}\oplus\Gamma_{2,0}\oplus\Gamma_{0,1}$.
+\end{enumerate}
+
+\end{answer}
+
+\includepdf[pages={-}]{lgla-2013-2014-scan}
+
+
+\fi
+
+\newpage
+
+\bigskip
+
+\begin{question}
+Let $\mathfrak{so}(5,\CC)$ be the Lie algebra of antisymmetric complex 5-by-5 matrices (the complexification of $\mathfrak{so}(5)$). What is its dimension?
+
+{\em You may use a computer algebra system for the rest of this question.}
+
+Consider the abelian Lie subalgebra $\mathfrak{t}$ spanned by elements
+\[H_1=\left(\begin{array}{ccccc}
+0 & i& 0 & 0 & 0\\
+-i & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0
+\end{array}\right),\qquad H_2=\left(\begin{array}{ccccc}
+0 & 0& 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & i & 0\\
+0 & 0 & -i & 0 & 0\\
+0 & 0 & 0 & 0 & 0
+\end{array}\right)\]
+Let $L_1$, $L_2$ be a $\ZZ$-basis for the weight lattice $\mathfrak{t}^*_{\ZZ}$ given by
+\[L_i(H_j)=\delta_{ij}.\]
+By considering the adjoint action of $H_1$ and $H_2$ on the eight matrices
+\begin{gather*}
+K_1^{\pm}=\left(\begin{array}{ccccc}
+0 & 0& 0 & 0 & -1\\
+0 & 0 & 0 & 0 & \pm i\\
+0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0\\
+1 & \mp i & 0 & 0 & 0
+\end{array}\right),\quad
+K_2^{\pm}=\left(\begin{array}{ccccc}
+0 & 0& 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & -1\\
+0 & 0 & 0 & 0 & \pm i\\
+0 & 0 & 1 & \mp i & 0
+\end{array}\right)\\
+L^{\pm}=\left(\begin{array}{ccccc}
+0 & 0& -1 & \pm i & 0\\
+0 & 0 & \pm i & 1 & 0\\
+1 & \mp i & 0 & 0 & 0\\
+\mp i & -1 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0
+\end{array}\right),\quad
+M^{\pm}=\left(\begin{array}{ccccc}
+0 & 0& \pm i & 1 & 0\\
+0 & 0 & -1 & \pm i & 0\\
+\mp i & 1 & 0 & 0 & 0\\
+-1 & \mp i & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0
+\end{array}\right)\end{gather*}
+find the roots in terms of $L_1$ and $L_2$ and draw the root diagram in $\mathfrak{t}^*_{\ZZ}$.
+
+{\em You can think of $\mathfrak{t}^*_{\ZZ}$ as the usual square lattice in $\RR^2$.}
+\end{question}
+
+\iffalse
+\begin{answer}
+The Lie algebra is 10 complex dimensional.
+
+We have
+\begin{align*}
+[H_i,K_j^{\pm}]&=\pm \delta_{ij}K_j^{\pm}\\
+[H_1,L^{\pm}]&=\pm L^{\pm}\\
+[H_2,L^{\pm}]&=\pm L^{\pm}\\
+[H_1,M^{\pm}]&=\pm M^{\pm}\\
+[H_2,M^{\pm}]&=\mp M^{\pm}
+\end{align*}
+so the weights are $\pm L_i$ (with weight vectors $K_i^{\pm}$), $\pm (L_1+L_2)$ (with weight vectors $L^{\pm}$) and $\pm (L_1-L_2)$ (with weight vectors $M^{\pm}$). The root diagram is the set of points
+\[\{\pm(1,1),\pm(1,-1),(\pm 1,0),(0,\pm 1),0\}\]
+where all root spaces have multiplicity 1 except the zero root space, which has multiplicity 2.
+\end{answer}
+\newpage
+\fi
+
+\bigskip
+
+\begin{question}
+Let $V$ denote the standard 4-dimensional complex representation of $SU(4)$.
+\begin{enumerate}[(a)]
+\item Decompose $V\otimes V$ into its irreducible pieces.
+\item Decompose $V\otimes V^*$ into its irreducible pieces.
+\end{enumerate}
+\end{question}
+
+\iffalse
+\begin{answer}
+\begin{enumerate}
+\item There is a tetrahedral weight diagram with ten vertices (all multiplicity 1), namely the symmetric square, and an octahedral diagram with its six corners (all multiplicity 1), namely the exterior square. These are the weight diagrams of the irreducible pieces.
+\item This splits as the adjoint representation plus the trivial one-dimensional representation.
+\end{enumerate}
+\end{answer}
+\newpage
+\fi
+
+
+%\begin{question}
+%Find a maximal torus in $SO(6)$, find the roots and draw the root space decomposition of its Lie algebra. Establish the isomorphism $\OP{Spin}(6)\cong SU(4)$ where $\OP{Spin}(6)$ denotes the universal cover of $SO(6)$.
+%\end{question}
+
+\iffalse
+%\begin{answer}
+
+%\end{answer}
+\fi
+
+\end{document}

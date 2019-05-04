@@ -1,0 +1,141 @@
+\documentclass[12pt]{article}
+
+\include{qun-sheet-texhead}
+\include{diagrams}
+
+\title{Sheet 2: Matrix groups}
+\author{J. Evans}
+\date{}
+
+\begin{document}
+\maketitle
+
+
+\begin{question}\ \\
+Prove that $A^T=-A$ if and only if $\exp(tA)\in O(n)$ for all $t\in\RR$. This implies that the Lie algebra of $O(n)$ is the space $\mathfrak{o}(n)$ of antisymmetric matrices.
+\end{question}
+
+\iffalse
+\begin{answer}
+If $A^T=-A$ then $(\exp(tA))^T=\left(\sum_{n=0}^{\infty}\frac{1}{n!}A^n\right)^T=\sum_{n=0}^{\infty}\frac{1}{n!}(A^T)^n=\sum_{n=0}^{\infty}\frac{1}{n!}(-1)^nA^n=\exp(-tA)$ hence $\exp(tA)\left(\exp(tA)\right)^T=1$ and $\exp(tA)\in O(n)$.
+
+Conversely if $\exp(tA)\left(\exp(tA)\right)^T=1$ for all $t$ then differentiating with respect to $t$ at $t=0$ we get
+\[A+A^T=0\]
+and hence $A^T=-A$.
+\end{answer}
+\newpage
+\fi
+
+\bigskip
+
+\begin{question}
+Show that the third order term in the Baker-Campbell-Hausdorff formula for $\log(\exp A\exp B)$ is
+\[\frac{1}{12}[A,[A,B]]-\frac{1}{12}[B,[A,B]].\]
+{\em If you think this is getting messy, it just means you're on the right track. Everything will simplify beautifully.}
+\end{question}
+
+\iffalse
+\begin{answer}
+Let
+\[e^Ae^B-1=X=\left(1+A+A^2/2+A^3/3!+\cdots\right)\left(1+B+B^2/2+B^3/3!+\cdots\right)-1\]
+and compute
+\[\log(e^Ae^B)=\log(1+X)=X-X^2/2+X^3/3+\cdots\]
+to third order. Thereafter, good luck. Be careful to note that $A$ and $B$ do not commute.
+\end{answer}
+\newpage
+\fi
+
+\bigskip
+
+\begin{question}\ \\
+\begin{enumerate}
+\item[(a)] Suppose that $W_1$ and $W_2$ are complementary subspaces of $\mathfrak{gl}(n,\RR)$, so that $\mathfrak{gl}(n,\RR)=W_1\oplus W_2$. Consider the map
+\[F\colon W_1\oplus W_2\to GL(n,\RR),\quad F(w_1\oplus w_2)=\exp(w_1)\exp(w_2).\]
+By computing the Taylor expansion of $F$ (plugging in the Taylor expansions of $\exp(w_1)$ and $\exp(w_2)$ and expanding), show that $d_{(0,0)}F(w_1\oplus w_2)=w_1+w_2$.
+\item[(b)] Deduce that there are open neighbourhoods $0\in U'\subset\mathfrak{gl}(n,\RR)$ and $1\in V'\subset GL(n,\RR)$ such that $F|_{U'}\colon U'\to V'$ is a diffeomorphism.
+\item[(c)] Let $G\subset GL(n,\RR)$ be a matrix group, set $W_1=\mathfrak{g}$ and let $W_2$ be a complement for $V$. Given $g\in G$, define
+\[F_g\colon\mathfrak{g}\oplus W_2\to GL(n,\RR),\quad F_g(w_1\oplus w_2)=g\exp(w_1)\exp(w_2)\]
+Show that there are open sets $0\in U'\subset\mathfrak{gl}(n,\RR)$ and $g\in V'\subset GL(n,\RR)$ such that $F_g|_{U'}$ is a diffeomorphism.
+\end{enumerate}
+\end{question}
+
+\iffalse
+\begin{answer}
+\begin{enumerate}[(a)]
+\item We have $F(w_1\oplus w_2)=(1+w_1+\cdots)(1+w_2+\cdots)=1+w_1+w_2+\cdots$ so the first order term in the Taylor expansion is $w_1+w_2$ (i.e. the differential $d_{(0,0)}F(w_1\oplus w_2)=w_1+w_2$ is the identity).
+\item Since the differential is the identity and in particular invertible, the inverse function theorem guarantees the existence of a local smooth inverse for $F$ restricted to a sufficiently small neighbourhood of $0\in W_1\oplus W_2$.
+\item In this case the differential is $d_{(0,0)}F_g(w_1\oplus w_2)=gw_1+gw_2$ in other words it is multiplication by $g\in GL(n,\RR)$ which is invertible so the inverse function theorem guarantees that $F_g$ is a local diffeomorphism. This provides exponential charts near every point $g\in G$.
+\end{enumerate}
+\end{answer}
+\fi
+\newpage
+
+\bigskip
+\hrule
+\bigskip
+The last two questions study the following formula and its applications.
+
+\begin{lma}[Jacobi formula\footnote{Not to be confused with the Jacobi identity later in the course.}]
+Let $A(t)$ be a path of invertible matrices ($t\in\RR$). Then
+\begin{equation}\label{eqn:jacformula}
+\frac{d}{dt}\det(A(t))=\det(A(t))\OP{Tr}(A^{-1}\dot{A}(t)).
+\end{equation}
+Here $\OP{Tr}(M)$ denotes the trace of $M$ (the sum of its diagonal entries) and $\dot{A}(t)$ denotes the matrix whose entries are the $t$-derivatives of the entries of $A$.
+\end{lma}
+\bigskip
+\hrule
+\bigskip
+
+\begin{question}(Proof of Jacobi formula)\\
+\begin{enumerate}
+\item[(a)] Show that $\det(1+\epsilon H)=1+\epsilon\OP{Tr}(H)+\mathcal{O}(\epsilon^2)$. {\em Hint: It might help to write out}
+\[\det(1+\epsilon H)=\det\MATR{1+\epsilon H_{11}}{\epsilon H_{12}}{\epsilon H_{1n}}{\epsilon H_{21}}{1+\epsilon H_{22}}{\epsilon H_{2n}}{\epsilon H_{n1}}{\epsilon H_{n2}}{1+\epsilon H_{nn}}.\]
+\item[(b)] Show that $\det(A+\epsilon H)=\det(A)+\epsilon\det(A)\OP{Tr}(A^{-1}H)+\mathcal{O}(\epsilon^2)$.
+\item[(c)] Suppose that $A(t+\epsilon)=A(t)+\epsilon\dot{A}(t)+\mathcal{O}(\epsilon^2)$ is the Taylor expansion of a path $A(t)$ of matrices. Deduce Jacobi's formula \eqref{eqn:jacformula}.
+\end{enumerate}
+\end{question}
+
+\iffalse
+\begin{answer}
+\begin{enumerate}[(a)]
+\item We have
+\begin{align*}
+\det(1+\epsilon H)&=\det\MATR{1+\epsilon H_{11}}{\epsilon H_{12}}{\epsilon H_{1n}}{\epsilon H_{21}}{1+\epsilon H_{22}}{\epsilon H_{2n}}{\epsilon H_{n1}}{\epsilon H_{n2}}{1+\epsilon H_{nn}}\\
+&=(1+\epsilon H_{11})(1+\epsilon H_{22})\cdots(1+\epsilon H_{nn})+\mathcal{O}(\epsilon^2)
+\end{align*}
+where the product comes from the diagonal terms and all other products contributing to the determinant involve at least two off-diagonal terms and hence have a factor of $\epsilon^2$. This expands to
+\[\det(1+\epsilon H)=1+\epsilon\sum H_{ii}+\mathcal{O}(\epsilon^2)\]
+and $\OP{Tr}(H)=\sum H_{ii}$.
+\item We have $\det(A+\epsilon H)=\det(A(1+\epsilon A^{-1}H))=\det(A)\det(1+\epsilon A^{-1}H)$ so $\det(A+\epsilon H)=\det(A)+\epsilon\det(A)\OP{Tr}(A^{-1}H)+\mathcal{O}(\epsilon^2)$ by part (a).
+\item If $A(t)$ is a path of matrices then $\det(A(t+\epsilon))=\det(A(t)+\epsilon\dot{A}(t)+\mathcal{O}(\epsilon^2))=\det(A(t))+\epsilon\det(A)\OP{Tr}(A^{-1}(t)\dot{A}(t))+\mathcal{O}(\epsilon^2)$. Since the derivative is just the first order part of the Taylor series we have Jacobi's formula
+\[\frac{d}{dt}\det(A(t))=\det(A)\OP{Tr}(A^{-1}(t)\dot{A}(t)).\]
+\end{enumerate}
+\end{answer}
+\newpage
+\fi
+
+\bigskip
+
+\begin{question}(Application of Jacobi formula)\\
+Given an $n$-by-$n$ matrix $H$, let $\phi(t)=\det\exp(tH)$.
+\begin{enumerate}
+\item[(a)] Deduce from the Jacobi formula that $\dot{\phi}(t)=\phi(t)\OP{Tr}(H)$.
+\item[(b)] Deduce from (a) that $\det(\exp H)=\exp\OP{Tr}(H)$.
+\end{enumerate}
+Let $SL(n,\RR)$ denote the group of $n$-by-$n$ matrices with determinant one and $\mathfrak{sl}(n,\RR)$ denote the space of $n$-by-$n$ matrices with trace zero.
+\begin{enumerate}
+\item[(c)] Deduce that $H\in\mathfrak{sl}(n,\RR)$ if and only if $\exp(tH)\in SL(n,\RR)$ for all $t\in\RR$. {\em This implies that $\mathfrak{sl}(n,\RR)$ is the Lie algebra of $SL(n,\RR)$.}
+\end{enumerate}
+\end{question}
+
+\iffalse
+\begin{answer}
+\begin{enumerate}[(a)]
+\item We have $\frac{d}{dt}\exp(tH)=\exp(tH)H$ so the Jacobi formula gives $\frac{d}{dt}\det(\exp(tH))=\det(\exp(tH))\OP{Tr}(\exp(-tH)\exp(tH)H)$ and if $\phi(t)=\det(\exp(tH))$ then $\dot{\phi}(t)=\phi(t)\OP{Tr}(H)$.
+\item We also know that $\phi(0)=1$ so this tells us that $\phi(t)$ is a solution to the ODE $\dot{\phi}(t)=\phi(t)\OP{Tr}(H)$ with $\phi(0)=1$. Another solution is $\exp(t\OP{Tr}(H))$. By uniqueness of solutions to ODEs with given initial conditions we get that $\phi(t)=\exp(t\OP{Tr}(H))$.
+\item If $H\in\mathfrak{sl}(n,\RR)$ then $\OP{Tr}(H)=0$ so $\exp(t\OP{Tr}(H))=0$ so $\det(\exp(tH))=\exp(0)=1$ so $\exp(tH)\in SL(n,\RR)$. Conversely if $\exp(tH)\in SL(n,\RR)$ then $\det(\exp(tH))=1$ for all $t$ so differentiating with respect to $t$ at $t=0$ we get $\OP{Tr}(H)=0$.
+\end{enumerate}
+\end{answer}
+\fi
+
+\end{document}
